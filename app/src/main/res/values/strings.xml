@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alexandria">ALexandria,</string>
+    <string name="eygpt">Eygpt</string>
+    <string name="sun_20_june">sun, 20 june</string>
+    <string name="today">Today</string>
+    <string name="sunny">Sunny</string>
+    <string name="temp">22°</string>
+    <string name="next_days">Next Days</string>
+</resources>
