@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <data>
+
+        <variable
+            name="weather"
+            type="com.example.weather.model.weather" />
+        <variable
+            name="hour"
+            type="com.example.weather.model.Hour" />
+    </data>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/rounded_item"
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
-    android:padding="7dp">
+    android:padding="10dp">
+
+
 
     <TextView
         android:id="@+id/temp_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1 PM"
+        android:text="@{weather.forecast.forecastday[3]}"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="10sp"/>
@@ -23,6 +37,7 @@
         android:layout_gravity="center"
         android:layout_width="50dp"
         android:layout_height="89dp"
+        imgUrl="@{hour.condition.icon}"
         android:src="@drawable/ic_cloud" />
 
 
@@ -30,10 +45,11 @@
         android:id="@+id/temp_tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/temp"
+        android:text="@{hour.condition.text}"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="10sp"/>
 
 
 </LinearLayout>
+</layout>

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.weather.viewmodel.WeatherViewModel" />
+
+        
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -51,7 +61,7 @@
         android:id="@+id/cityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alexandria"
+        android:text="@{viewModel.response.location.region}"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -65,7 +75,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:text="@string/eygpt"
+        android:text="@{viewModel.response.location.country}"
         app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
         app:layout_constraintTop_toBottomOf="@+id/cityName"/>
 
@@ -75,7 +85,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:text="@string/sun_20_june"
+        android:text="@{viewModel.response.location.localtime}"
         app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
         app:layout_constraintTop_toBottomOf="@+id/countryName"
         tools:ignore="SmallSp" />
@@ -114,6 +124,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="@string/sunny"
             android:src="@drawable/ic_sun"
+            imgUrl="@{viewModel.response.current.condition.icon}"
             app:layout_constraintStart_toStartOf="@id/detail_layout"
             app:layout_constraintTop_toBottomOf="@id/today_tv" />
 
@@ -121,7 +132,7 @@
             android:id="@+id/temp_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/temp"
+            android:text="@{Double.toString(viewModel.response.current.temp_c)}"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="60sp"
@@ -133,7 +144,7 @@
             android:id="@+id/temp_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sunny"
+            android:text="@{viewModel.response.current.condition.text}"
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/detail_layout"
@@ -178,6 +189,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        tools:listitem="@layout/item_temp"
+        app:listData="@{viewModel.response.forecast.forecastday}"
         android:background="@drawable/rounded_recyclerview"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
@@ -186,3 +199,5 @@
         app:layout_constraintBottom_toTopOf="@id/bottomguideline" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

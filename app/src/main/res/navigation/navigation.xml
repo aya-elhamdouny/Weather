@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_homeFragment_to_nextDaysFragment"
             app:destination="@id/nextDaysFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nextDaysFragment"
         android:name="com.example.weather.ui.NextDaysFragment"
         android:label="fragment_next_days"
         tools:layout="@layout/fragment_next_days" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.weather.ui.DetailFragment"
+        android:label="DetailFragment" />
 </navigation>
