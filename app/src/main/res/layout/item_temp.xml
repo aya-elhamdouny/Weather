@@ -4,10 +4,6 @@
 
 
     <data>
-
-        <variable
-            name="weather"
-            type="com.example.weather.model.weather" />
         <variable
             name="hour"
             type="com.example.weather.model.Hour" />
@@ -26,7 +22,7 @@
         android:id="@+id/temp_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{weather.forecast.forecastday[3]}"
+        android:text="@{hour.time}"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="10sp"/>

@@ -10,27 +10,31 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FragmentHomeBinding
 import com.example.weather.databinding.ItemTempBinding
+import com.example.weather.model.Hour
+import okhttp3.internal.http2.Hpack
 
 
-class WeatherAdapter : ListAdapter<weather, WeatherAdapter.weatherViewHolder>(DiffCallback){
+class WeatherAdapter : ListAdapter<Hour, WeatherAdapter.weatherViewHolder>(DiffCallback){
 
 
     class weatherViewHolder(private var binding : ItemTempBinding ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(weather: weather){
-            binding.hour = weather.forecast.forecastday[3].hour[0]
+        fun bind(hour: Hour){
+            binding.hour = hour
             binding.executePendingBindings()
         }
 
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<weather>() {
-        override fun areItemsTheSame(oldItem: weather, newItem: weather): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Hour>() {
+
+
+        override fun areItemsTheSame(oldItem: Hour, newItem: Hour): Boolean {
             return  oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: weather, newItem: weather): Boolean {
-            return  oldItem.location.region == newItem.location.region
+        override fun areContentsTheSame(oldItem: Hour, newItem: Hour): Boolean {
+            return  oldItem.is_day == newItem.is_day
         }
 
     }
@@ -40,8 +44,8 @@ class WeatherAdapter : ListAdapter<weather, WeatherAdapter.weatherViewHolder>(Di
     }
 
     override fun onBindViewHolder(holder: weatherViewHolder, position: Int) {
-        val weather = getItem(position)
-        holder.bind(weather)
+        val hour = getItem(position)
+        holder.bind(hour)
     }
 
 
