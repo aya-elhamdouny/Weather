@@ -10,7 +10,7 @@ interface ApiInterface {
     //https://weatherapi-com.p.rapidapi.com/forecast.json?q=London&days=3
     @GET("forecast.json")
     suspend fun getForecast(
-        @Query("q") Country : String = "alexandria"
+        @Query("q") Country : String
     ): weather
 
 

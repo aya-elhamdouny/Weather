@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.adapters.WeatherAdapter
 import com.example.weather.databinding.FragmentHomeBinding

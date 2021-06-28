@@ -1,13 +1,29 @@
 package com.example.weather.repository
 
+import android.app.Application
+import android.content.Context
+import android.net.wifi.WifiManager
+import android.util.Log
+import com.example.weather.App
+import com.example.weather.IPAddress
+import com.example.weather.addresapi.IPRetrofitBuilder
 import com.example.weather.api.RetroftitBuilder
+import kotlin.coroutines.coroutineContext
 
-class WeatherRepository {
+class WeatherRepository()  {
+
 
     suspend fun getForecast() =
-        RetroftitBuilder.api.getForecast()
+        RetroftitBuilder.api.getForecast(getCountryName())
 
 
     suspend fun getday()=
-        RetroftitBuilder.api.getForecast().forecast
+        RetroftitBuilder.api.getForecast("alexandria").forecast
+
+        suspend fun getCountryName()=
+            IPRetrofitBuilder.api.getCountryname(268566538).country_name
+
+
+
+
 }

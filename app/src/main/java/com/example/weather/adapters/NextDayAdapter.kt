@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FragmentNextDaysBinding
 import com.example.weather.model.Forecast
+import com.example.weather.model.weather
 
-class NextDayAdapter : ListAdapter<Forecast, NextDayAdapter.viewHolder>(DiffCallback) {
+class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecast, NextDayAdapter.viewHolder>(DiffCallback) {
 
 
     class viewHolder(private var binding: FragmentNextDaysBinding)  : RecyclerView.ViewHolder(binding.root){
@@ -38,5 +39,9 @@ class NextDayAdapter : ListAdapter<Forecast, NextDayAdapter.viewHolder>(DiffCall
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val data = getItem(position)
         holder.bind(data)
+    }
+
+    class OnClickListener(val clickListener: (weather: weather) -> Unit) {
+        fun onClick(weather: weather) = clickListener(weather)
     }
 }
