@@ -5,9 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import com.example.Forecast.adapters.NextDayAdapter
 import com.example.weather.R
+import com.example.weather.databinding.FragmentNextDaysBinding
 
 
-class NextDaysFragment : Fragment(R.layout.fragment_next_days) {
+class NextDaysFragment : Fragment() {
+
+
+    private lateinit var binding: FragmentNextDaysBinding
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_next_days, container, false)
+        binding.lifecycleOwner = this
+        binding.nextdaysRv.adapter = NextDayAdapter()
+
+        binding.bkBtn.setOnClickListener {
+            findNavController().navigate(NextDaysFragmentDirections.actionNextDaysFragmentToHomeFragment())
+        }
+
+
+        return binding.root
+
+
+    }
+
 
 }

@@ -8,13 +8,14 @@
         <variable
             name="viewModel"
             type="com.example.weather.viewmodel.WeatherViewModel" />
+        <variable
+            name="hour"
+            type="com.example.weather.model.Hour" />
 
-        
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:visibility="visible"
     tools:context=".ui.HomeFragment">
 
@@ -62,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@{viewModel.response.location.region}"
-        android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
         app:layout_constraintTop_toBottomOf="@+id/topguideline" />
 
@@ -72,115 +73,211 @@
         android:id="@+id/countryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:paddingTop="0dp"
         android:textStyle="bold"
         android:textSize="25sp"
+        android:paddingBottom="1dp"
         android:text="@{viewModel.response.location.country}"
         app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
         app:layout_constraintTop_toBottomOf="@+id/cityName"/>
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:text="@{viewModel.response.location.localtime}"
-        app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
-        app:layout_constraintTop_toBottomOf="@+id/countryName"
-        tools:ignore="SmallSp" />
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detail_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@id/today_btn"
+       android:paddingBottom="15dp"
+        android:paddingTop="20dp"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
-        app:layout_constraintTop_toBottomOf="@id/date">
+        app:layout_constraintTop_toBottomOf="@id/countryName">
 
-
-        <TextView
-            android:id="@+id/today_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
-            android:paddingBottom="10dp"
-            android:text="@string/today"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@id/detail_layout"
-            app:layout_constraintStart_toStartOf="@id/detail_layout"
-            app:layout_constraintTop_toTopOf="@id/detail_layout" />
 
         <ImageView
             android:id="@+id/temp_iv"
-            android:layout_width="123dp"
-            android:layout_height="77dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
+            imgUrl="@{viewModel.response.current.condition.icon}"
+            android:layout_width="246dp"
+            android:layout_height="154dp"
             android:contentDescription="@string/sunny"
             android:src="@drawable/ic_sun"
-            imgUrl="@{viewModel.response.current.condition.icon}"
             app:layout_constraintStart_toStartOf="@id/detail_layout"
-            app:layout_constraintTop_toBottomOf="@id/today_tv" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/temp_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{Double.toString(viewModel.response.current.temp_c)}"
-            android:textStyle="bold"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="60sp"
+            app:layout_constraintStart_toStartOf="@+id/detail_layout"
             app:layout_constraintEnd_toEndOf="@id/detail_layout"
-            app:layout_constraintStart_toEndOf="@id/temp_iv"
-            app:layout_constraintTop_toBottomOf="@id/today_tv" />
+            app:layout_constraintTop_toBottomOf="@id/temp_iv" />
 
         <TextView
             android:id="@+id/temp_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.response.current.condition.text}"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/detail_layout"
             app:layout_constraintStart_toStartOf="@id/detail_layout"
-            app:layout_constraintTop_toBottomOf="@+id/temp_iv" />
-
+            app:layout_constraintTop_toBottomOf="@+id/temp_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        app:layout_constraintTop_toBottomOf="@id/detail_layout"
+        app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
+        app:layout_constraintEnd_toStartOf="@id/leftGuideline"
+        android:orientation="horizontal" >
+
+
+
+
+        <androidx.cardview.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            app:cardBackgroundColor="@color/lightBlue"
+            android:id="@+id/humidity"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="25dp"
+                android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_icons8_wet_50"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Humidity"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{Double.toString(viewModel.response.current.humidity)}"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+
+        <androidx.cardview.widget.CardView
+
+            app:cardBackgroundColor="@color/lightRed"
+            android:id="@+id/pressure"
+            android:layout_marginRight="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="25dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icons8_pressure_50"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pressure"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{Double.toString(viewModel.response.current.precip_mm)}"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+
+            app:cardBackgroundColor="@color/lightgreen"
+            android:id="@+id/wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="25dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_icons8_wind_50"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wind"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@{Double.toString(viewModel.response.current.wind_mph)}"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
 
 
 
     <TextView
         android:id="@+id/today_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/today"
-        android:textColor="@color/white"
-        android:textSize="15sp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="Next 24 hours"
+        android:textColor="@color/black"
         android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toBottomOf="@id/detail_layout"
+        android:paddingTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/linear"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
         app:layout_constraintEnd_toStartOf="@id/nextdays_btn"
-        />
+        android:layout_marginStart="20dp" />
 
     <Button
         android:id="@+id/nextdays_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginLeft="192dp"
         android:background="@android:color/transparent"
         style="?android:attr/borderlessButtonStyle"
         android:text="next days"
         android:textStyle="bold"
+        android:textColor="@color/black"
+        android:paddingBottom="15dp"
         app:layout_constraintStart_toEndOf="@id/today_btn"
-        app:layout_constraintTop_toBottomOf="@+id/detail_layout"
+        app:layout_constraintTop_toBottomOf="@+id/linear"
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"/>
 
 
@@ -190,13 +287,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:listitem="@layout/item_temp"
-        app:listData="@{viewModel.response.forecast.forecastday}"
-        android:background="@drawable/rounded_recyclerview"
+        app:listData="@{viewModel.hour}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/today_btn"
+        app:layout_constraintTop_toBottomOf="@id/nextdays_btn"
         app:layout_constraintBottom_toTopOf="@id/bottomguideline" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

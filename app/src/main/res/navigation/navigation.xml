@@ -21,9 +21,19 @@
         android:id="@+id/nextDaysFragment"
         android:name="com.example.weather.ui.NextDaysFragment"
         android:label="fragment_next_days"
-        tools:layout="@layout/fragment_next_days" />
+        tools:layout="@layout/fragment_next_days" >
+        <action
+            android:id="@+id/action_nextDaysFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.weather.ui.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment"
+        tools:layout="@layout/temp_details">
+
+        <action
+            android:id="@+id/action_detailFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

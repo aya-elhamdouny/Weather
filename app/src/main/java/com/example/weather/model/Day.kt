@@ -22,4 +22,4 @@ data class Day(
     val totalprecip_in: Double,
     val totalprecip_mm: Double,
     val uv: Double
-)
+): Serializable

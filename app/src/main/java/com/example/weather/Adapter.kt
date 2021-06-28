@@ -1,14 +1,15 @@
 package com.example.weather
 
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.WrapperListAdapter
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.Forecast.adapters.NextDayAdapter
+
 import com.example.weather.adapters.WeatherAdapter
+import com.example.weather.model.Forecast
 import com.example.weather.model.Hour
 import com.example.weather.model.weather
 
@@ -27,9 +28,16 @@ fun bindImg(imgView : ImageView , imgUrl :String?){
 }
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Hour>?) {
+fun bindHourRecyclerView(recyclerView: RecyclerView, data: List<Hour>?) {
     val adapter = recyclerView.adapter as WeatherAdapter
     adapter.submitList(data)
 }
+@BindingAdapter("listData")
+fun bindforecastRecyclerView(recyclerView: RecyclerView, data: List<Forecast>?) {
+    val adapter = recyclerView.adapter as NextDayAdapter
+    adapter.submitList(data)
+}
+
+
 
 

@@ -6,4 +6,8 @@ class WeatherRepository {
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast()
+
+
+    suspend fun getday()=
+        RetroftitBuilder.api.getForecast().forecast
 }

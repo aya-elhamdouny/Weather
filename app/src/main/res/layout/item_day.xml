@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<data>
+    <variable
+        name="day"
+        type="com.example.weather.model.Day" />
+</data>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:orientation="horizontal"
     android:padding="5dp"
     android:layout_width="wrap_content"
@@ -11,20 +20,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="190dp"
-        android:text="sunday"
+        android:text="@{}"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
     <ImageView
         android:layout_width="73dp"
         android:layout_height="39dp"
+
         android:src="@drawable/ic_cloudy" />
 
     <TextView
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="@string/temp"
+        android:text="@{}"
         android:textSize="25sp"
         android:textColor="@color/black"/>
 
 </LinearLayout>
+</layout>

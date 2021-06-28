@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weather.model.Current
+import com.example.weather.model.Forecast
+import com.example.weather.model.Hour
 import com.example.weather.model.weather
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
@@ -25,11 +28,28 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
     val response : LiveData<weather>
         get() = _response
 
+    private val _hour = MutableLiveData<List<Hour>>()
+    val hour : LiveData<List<Hour>>
+        get() = _hour
+
+    private val _forecast = MutableLiveData<Forecast>()
+    val forecast : LiveData<Forecast>
+        get() = _forecast
+
+
+    private val _navigateToSelectedProperty = MutableLiveData<Current>()
+    val navigateToSelectedProperty : LiveData<Current>
+        get() =_navigateToSelectedProperty
+
+
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
     init {
         getWeather()
+
+
     }
 
     private fun getWeather() {
@@ -38,7 +58,9 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
             try {
                 val listResult = weatherRepository.getForecast()
                 _response.value = listResult
-            } catch (e: Exception) {
+                _hour.value = listResult.forecast.forecastday[3].hour
+                _forecast.value = listResult.forecast
+                } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
             }
         }
@@ -49,6 +71,14 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         viewModelJob.cancel()
     }
 
-    fun onDetailClicked() {}
 
+    fun displayPropertyDetails(weather: weather) {
+        _navigateToSelectedProperty.value = weather.current
+    }
+
+
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
 }

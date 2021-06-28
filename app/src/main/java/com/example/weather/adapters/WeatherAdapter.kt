@@ -1,21 +1,14 @@
 package com.example.weather.adapters
-
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.weather.model.weather
-import com.example.weather.viewmodel.WeatherViewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.databinding.FragmentHomeBinding
 import com.example.weather.databinding.ItemTempBinding
 import com.example.weather.model.Hour
-import okhttp3.internal.http2.Hpack
 
 
 class WeatherAdapter : ListAdapter<Hour, WeatherAdapter.weatherViewHolder>(DiffCallback){
-
 
     class weatherViewHolder(private var binding : ItemTempBinding ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(hour: Hour){
@@ -27,7 +20,6 @@ class WeatherAdapter : ListAdapter<Hour, WeatherAdapter.weatherViewHolder>(DiffC
 
 
     companion object DiffCallback : DiffUtil.ItemCallback<Hour>() {
-
 
         override fun areItemsTheSame(oldItem: Hour, newItem: Hour): Boolean {
             return  oldItem == newItem

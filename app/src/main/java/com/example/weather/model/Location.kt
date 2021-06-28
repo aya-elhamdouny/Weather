@@ -12,4 +12,4 @@ data class Location(
     val name: String,
     val region: String,
     val tz_id: String
-)
+): Serializable
