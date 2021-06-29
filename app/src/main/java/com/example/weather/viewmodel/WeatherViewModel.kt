@@ -61,7 +61,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository, val databaseRep
                 _response.value = listResult
                 _hour.value = listResult.forecast.forecastday[3].hour
                 _forecast.value = listResult.forecast
-                databaseRepository.insertCurrentWwather(listResult)
+                databaseRepository.insertCurrentWwather(listResult.current)
                /* databaseRepository.insertLocation(listResult.location)
                 databaseRepository.insertforecast(listResult.forecast.forecastday)*/
                 } catch (e: Exception) {

@@ -6,11 +6,11 @@ import java.io.Serializable
 
 
 
-data class Hour(
+data class Hour constructor(
     val chance_of_rain: String,
     val chance_of_snow: String,
     val cloud: Int,
-    @Embedded
+    @Embedded(prefix = "hour_condition")
     val condition: Condition,
     val dewpoint_c: Double,
     val dewpoint_f: Double,

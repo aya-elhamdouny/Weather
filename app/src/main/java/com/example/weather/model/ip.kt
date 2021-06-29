@@ -2,7 +2,7 @@ package com.example.weather.model
 
 import java.io.Serializable
 
-data class ip(
+data class ip constructor(
     val city: Any,
     val continent_code: String,
     val continent_name: String,

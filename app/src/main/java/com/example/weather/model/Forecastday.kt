@@ -1,14 +1,11 @@
 package com.example.weather.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room.*
 import java.io.Serializable
 
-
-//@Entity(tableName = "forecast")
-data class Forecastday(
+@Entity(tableName = "forecast")
+data class Forecastday constructor(
+    @PrimaryKey
     val date: String,
     val date_epoch: Int,
     @Embedded

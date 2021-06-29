@@ -11,8 +11,8 @@ class DatabaseRepository(val database: WeatherDatabase) {
 
 
 
-suspend fun insertCurrentWwather(weather: weather) =
-    database.weatherDao.insertCurrentWeather(weather)
+suspend fun insertCurrentWwather(current: Current) =
+    database.weatherDao.insertCurrentWeather(current)
 
 
    /* suspend fun insertLocation(location: Location) =

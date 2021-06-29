@@ -27,11 +27,11 @@ interface WeatherDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCurrentWeather(weather: weather)
+    suspend fun insertCurrentWeather(current: Current)
 
 
-    @Query("select * from weather ")
-    fun getCurrentWeather() : LiveData<weather>
+    @Query("select * from currentWeather ")
+    fun getCurrentWeather() : LiveData<Current>
 
 
 /*

@@ -3,13 +3,13 @@ package com.example.weather.model
 import androidx.room.Embedded
 import java.io.Serializable
 
-data class Day(
+data class Day constructor(
     val avghumidity: Double,
     val avgtemp_c: Double,
     val avgtemp_f: Double,
     val avgvis_km: Double,
     val avgvis_miles: Double,
-    @Embedded
+    @Embedded(prefix = "day_condtion")
     val condition: Condition,
     val daily_chance_of_rain: String,
     val daily_chance_of_snow: String,
