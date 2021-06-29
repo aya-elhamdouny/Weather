@@ -1,16 +1,17 @@
+/*
 package com.example.weather.database
 
 import android.content.Context
-import android.location.Location
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.weather.model.Current
 import com.example.weather.model.Forecastday
+import com.example.weather.model.Location
 
 
-@Database(entities = [Location::class , Forecastday::class , Current::class] , version = 1)
-abstract class WeatherDatabase    : RoomDatabase(){
+@Database(entities = [Location::class , Forecastday::class , Current::class] , version = 1 , exportSchema = true)
+abstract class WeatherDatabase: RoomDatabase(){
 
     abstract val weatherDao : WeatherDao
 
@@ -33,3 +34,4 @@ abstract class WeatherDatabase    : RoomDatabase(){
          }
      }
 }
+*/

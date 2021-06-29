@@ -8,10 +8,9 @@ import com.example.weather.model.weather
 import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 
-class NextDaysViewModelProviderFactory (private val weatherRepository: WeatherRepository
-                                        , private val databaseRepository: DatabaseRepository) :
+class NextDaysViewModelProviderFactory (private val weatherRepository: WeatherRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return NextDaysViewModel(weatherRepository , databaseRepository) as T
+        return NextDaysViewModel(weatherRepository) as T
     }
 }

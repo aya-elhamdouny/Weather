@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.Forecastday.adapters.NextDayAdapter
@@ -27,17 +28,31 @@ class NextDaysFragment : Fragment() {
     val nextDaysViewModelProviderFactory = NextDaysViewModelProviderFactory(repository)
 
     private val viewModel: NextDaysViewModel by lazy {
-        ViewModelProvider(this , nextDaysViewModelProviderFactory ).get(NextDaysViewModel::class.java)
+        ViewModelProvider(this, nextDaysViewModelProviderFactory).get(NextDaysViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    lateinit var adapter: NextDayAdapter
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_next_days, container, false)
         binding.lifecycleOwner = this
 
-        binding.nextdaysRv.adapter = NextDayAdapter(NextDayAdapter.OnClickListener {
-            viewModel.displayPropertyDetails(it)})
 
+        adapter=  NextDayAdapter(NextDayAdapter.OnClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+        binding.nextdaysRv.adapter = adapter
+
+        viewModel.forecast.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
+        }
+
+        )
         binding.bkBtn.setOnClickListener {
             findNavController().navigate(NextDaysFragmentDirections.actionNextDaysFragmentToHomeFragment())
         }

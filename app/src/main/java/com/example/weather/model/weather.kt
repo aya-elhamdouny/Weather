@@ -10,10 +10,7 @@ import java.io.Serializable
 
 
 data class weather (
-    @Embedded
     val current: Current,
-    @Embedded
     val forecast: Forecast,
-    @Embedded
     val location: Location
 ) : Serializable

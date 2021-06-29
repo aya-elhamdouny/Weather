@@ -1,13 +1,11 @@
 package com.example.weather.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather.model.Current
-import com.example.weather.model.Forecast
-import com.example.weather.model.Hour
-import com.example.weather.model.weather
+import com.example.weather.model.*
 import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WeatherViewModel(val weatherRepository: WeatherRepository, val databaseRepository: DatabaseRepository) : ViewModel() {
+class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
     private val _status = MutableLiveData<String>()
     val status: LiveData<String>
@@ -33,8 +31,8 @@ class WeatherViewModel(val weatherRepository: WeatherRepository, val databaseRep
     val hour : LiveData<List<Hour>>
         get() = _hour
 
-    private val _forecast = MutableLiveData<Forecast>()
-    val forecast : LiveData<Forecast>
+    private val _forecast = MutableLiveData<Forecastday>()
+    val forecast : LiveData<Forecastday>
         get() = _forecast
 
 
@@ -56,17 +54,12 @@ class WeatherViewModel(val weatherRepository: WeatherRepository, val databaseRep
     private fun getWeather() {
         viewModelScope.launch {
 
-            try {
                 val listResult = weatherRepository.getForecast()
-                _response.value = listResult
-                _hour.value = listResult.forecast.forecastday[3].hour
-                _forecast.value = listResult.forecast
-                databaseRepository.insertCurrentWwather(listResult.current)
-               /* databaseRepository.insertLocation(listResult.location)
-                databaseRepository.insertforecast(listResult.forecast.forecastday)*/
-                } catch (e: Exception) {
-                _status.value = "Failure: ${e.message}"
-            }
+                _response.postValue(listResult)
+                Log.d("Time hi",listResult.forecast.forecastday[2].hour[0].time)
+                _hour.value = listResult.forecast.forecastday[2].hour
+                _forecast.value = listResult.forecast.forecastday[0]
+
         }
     }
 

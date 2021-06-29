@@ -12,7 +12,7 @@ import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
-class NextDaysViewModel(val weatherRepository: WeatherRepository , val  databaseRepository: DatabaseRepository) : ViewModel() {
+class NextDaysViewModel(val weatherRepository: WeatherRepository ) : ViewModel() {
 
     private val _forecast = MutableLiveData<List<Forecastday>>()
     val forecast : LiveData<List<Forecastday>>
@@ -44,8 +44,8 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository , val  database
     }
 
 
-    fun displayPropertyDetails(weather: weather) {
-       _navigateToSelectedProperty.value = weather.forecast.forecastday
+    fun displayPropertyDetails(forecastday: Forecastday) {
+       //_navigateToSelectedProperty.value = forecastday
     }
 
 

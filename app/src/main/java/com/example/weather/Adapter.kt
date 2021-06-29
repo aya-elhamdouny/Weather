@@ -28,17 +28,6 @@ fun bindImg(imgView : ImageView , imgUrl :String?){
 
 }
 
-@BindingAdapter("listData")
-fun bindHourRecyclerView(recyclerView: RecyclerView, data: List<Hour>?) {
-    val adapter = recyclerView.adapter as WeatherAdapter
-    adapter.submitList(data)
-}
-@BindingAdapter("listData")
-fun bindforecastRecyclerView(recyclerView: RecyclerView, data: List<Forecastday>?) {
-    val adapter = recyclerView.adapter as NextDayAdapter
-    adapter.submitList(data)
-}
-
 
 
 

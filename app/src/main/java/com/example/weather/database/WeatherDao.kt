@@ -12,7 +12,6 @@ import com.example.weather.model.weather
 
 @Dao
 interface WeatherDao {
-
 /*
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -21,7 +20,8 @@ interface WeatherDao {
 
     @Query("select * from location ")
     fun getLocation() : LiveData<Location>
-*/
+
+
 
 
 
@@ -34,12 +34,13 @@ interface WeatherDao {
     fun getCurrentWeather() : LiveData<Current>
 
 
-/*
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertForecast(forecastday: List<Forecastday>)
 
 
     @Query("select * from location ")
-    fun getForecast() : LiveData<Forecastday>*/
+    fun getForecast() : LiveData<Forecastday>
+*/
+
 }

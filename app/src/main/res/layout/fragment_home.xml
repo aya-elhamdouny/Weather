@@ -13,6 +13,10 @@
             type="com.example.weather.model.Hour" />
 
     </data>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -287,7 +291,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:listitem="@layout/item_temp"
-        app:listData="@{viewModel.hour}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
@@ -295,7 +298,6 @@
         app:layout_constraintBottom_toTopOf="@id/bottomguideline" />
 
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </ScrollView>
 </layout>

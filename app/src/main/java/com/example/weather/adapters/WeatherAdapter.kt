@@ -8,7 +8,7 @@ import com.example.weather.databinding.ItemTempBinding
 import com.example.weather.model.Hour
 
 
-class WeatherAdapter : ListAdapter<Hour, WeatherAdapter.weatherViewHolder>(DiffCallback){
+class WeatherAdapter : ListAdapter<  Hour, WeatherAdapter.weatherViewHolder>(DiffCallback){
 
     class weatherViewHolder(private var binding : ItemTempBinding ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(hour: Hour){

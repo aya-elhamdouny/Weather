@@ -6,16 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FragmentNextDaysBinding
+import com.example.weather.databinding.ItemDayBinding
 import com.example.weather.model.Forecastday
 import com.example.weather.model.weather
 
 class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecastday, NextDayAdapter.viewHolder>(DiffCallback) {
 
 
-    class viewHolder(private var binding: FragmentNextDaysBinding)  : RecyclerView.ViewHolder(binding.root){
-
+    class viewHolder(private var binding : ItemDayBinding)  : RecyclerView.ViewHolder(binding.root){
         fun bind(forecast: Forecastday){
-           binding.viewmodel.forecast
+           binding.forecast = forecast
            binding.executePendingBindings()
         }
     }
@@ -33,15 +33,18 @@ class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecas
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder {
-        return viewHolder(FragmentNextDaysBinding.inflate(LayoutInflater.from(parent.context)))
+        return viewHolder(ItemDayBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val data = getItem(position)
+       /* holder.itemView.setOnClickListener {
+            onClickListener.onClick(forecastday)
+        }*/
         holder.bind(data)
     }
 
-    class OnClickListener(val clickListener: (weather: weather) -> Unit) {
-        fun onClick(weather: weather) = clickListener(weather)
+    class OnClickListener(val clickListener: (forecastday : Forecastday) -> Unit) {
+        fun onClick(forecastday : Forecastday) = clickListener(forecastday)
     }
 }

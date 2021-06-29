@@ -7,10 +7,9 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
-@Entity(tableName = "currentWeather")
+//@Entity(tableName = "currentWeather")
 data class Current constructor(
     val cloud: Int,
-    @Embedded(prefix = "current_condtion")
     val condition: Condition,
     val feelslike_c: Double,
     val feelslike_f: Double,
@@ -18,7 +17,6 @@ data class Current constructor(
     val gust_mph: Double,
     val humidity: Int,
     val is_day: Int,
-    @PrimaryKey
     val last_updated: String,
     val last_updated_epoch: Int,
     val precip_in: Double,

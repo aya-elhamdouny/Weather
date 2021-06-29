@@ -9,7 +9,6 @@ data class Day constructor(
     val avgtemp_f: Double,
     val avgvis_km: Double,
     val avgvis_miles: Double,
-    @Embedded(prefix = "day_condtion")
     val condition: Condition,
     val daily_chance_of_rain: String,
     val daily_chance_of_snow: String,
