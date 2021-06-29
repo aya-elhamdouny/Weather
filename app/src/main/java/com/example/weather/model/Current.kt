@@ -1,9 +1,15 @@
 package com.example.weather.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Ignore
 import java.io.Serializable
 
+
+//@Entity(tableName = "currentWeather")
 data class Current(
     val cloud: Int,
+    @Embedded
     val condition: Condition,
     val feelslike_c: Double,
     val feelslike_f: Double,

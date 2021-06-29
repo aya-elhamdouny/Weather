@@ -1,11 +1,16 @@
 package com.example.weather.model
 
+import androidx.room.Embedded
+import androidx.room.Entity
 import java.io.Serializable
+
+
 
 data class Hour(
     val chance_of_rain: String,
     val chance_of_snow: String,
     val cloud: Int,
+    @Embedded
     val condition: Condition,
     val dewpoint_c: Double,
     val dewpoint_f: Double,

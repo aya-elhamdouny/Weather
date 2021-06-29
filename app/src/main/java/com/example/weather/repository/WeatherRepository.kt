@@ -18,10 +18,10 @@ class WeatherRepository()  {
 
 
     suspend fun getday()=
-        RetroftitBuilder.api.getForecast("alexandria").forecast
+        RetroftitBuilder.api.getForecast("alexandria").forecast.forecastday
 
         suspend fun getCountryName()=
-            IPRetrofitBuilder.api.getCountryname(268566538).country_name
+            IPRetrofitBuilder.api.getCountryname(App.ip).country_name
 
 
 

@@ -1,5 +1,6 @@
 package com.example.weather.model
 
+import androidx.room.Embedded
 import java.io.Serializable
 
 data class Day(
@@ -8,6 +9,7 @@ data class Day(
     val avgtemp_f: Double,
     val avgvis_km: Double,
     val avgvis_miles: Double,
+    @Embedded
     val condition: Condition,
     val daily_chance_of_rain: String,
     val daily_chance_of_snow: String,

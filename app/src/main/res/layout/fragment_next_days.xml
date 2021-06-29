@@ -26,7 +26,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{viewmodel.forecast.forecastday[0]}"
+        android:text="Next Days"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:paddingBottom="40dp"
@@ -35,6 +35,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nextdays_rv"
         tools:listitem="@layout/item_day"
+        listData="@{viewmodel.forecast}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

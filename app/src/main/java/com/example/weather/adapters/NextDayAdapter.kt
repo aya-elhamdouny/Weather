@@ -1,4 +1,4 @@
-package com.example.Forecast.adapters
+package com.example.Forecastday.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,28 +6,28 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.databinding.FragmentNextDaysBinding
-import com.example.weather.model.Forecast
+import com.example.weather.model.Forecastday
 import com.example.weather.model.weather
 
-class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecast, NextDayAdapter.viewHolder>(DiffCallback) {
+class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecastday, NextDayAdapter.viewHolder>(DiffCallback) {
 
 
     class viewHolder(private var binding: FragmentNextDaysBinding)  : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(forecast: Forecast){
-            binding.viewmodel = forecast
-            binding.executePendingBindings()
+        fun bind(forecast: Forecastday){
+           binding.viewmodel.forecast
+           binding.executePendingBindings()
         }
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Forecast>(){
-        override fun areItemsTheSame(oldItem: Forecast, newItem: Forecast): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<Forecastday>(){
+        override fun areItemsTheSame(oldItem: Forecastday, newItem: Forecastday): Boolean {
             return oldItem==newItem
         }
 
-        override fun areContentsTheSame(oldItem: Forecast, newItem: Forecast): Boolean {
-            return    oldItem.forecastday== newItem.forecastday
+        override fun areContentsTheSame(oldItem: Forecastday, newItem: Forecastday): Boolean {
+            return    oldItem.date== newItem.date
         }
 
     }

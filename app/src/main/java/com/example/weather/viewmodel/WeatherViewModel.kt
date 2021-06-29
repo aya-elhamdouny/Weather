@@ -8,6 +8,7 @@ import com.example.weather.model.Current
 import com.example.weather.model.Forecast
 import com.example.weather.model.Hour
 import com.example.weather.model.weather
+import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
+class WeatherViewModel(val weatherRepository: WeatherRepository, val databaseRepository: DatabaseRepository) : ViewModel() {
 
     private val _status = MutableLiveData<String>()
     val status: LiveData<String>
@@ -60,6 +61,9 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
                 _response.value = listResult
                 _hour.value = listResult.forecast.forecastday[3].hour
                 _forecast.value = listResult.forecast
+                databaseRepository.insertCurrentWwather(listResult)
+               /* databaseRepository.insertLocation(listResult.location)
+                databaseRepository.insertforecast(listResult.forecast.forecastday)*/
                 } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
             }

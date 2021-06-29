@@ -6,10 +6,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.Forecast.adapters.NextDayAdapter
+import com.example.Forecastday.adapters.NextDayAdapter
 
 import com.example.weather.adapters.WeatherAdapter
 import com.example.weather.model.Forecast
+import com.example.weather.model.Forecastday
 import com.example.weather.model.Hour
 import com.example.weather.model.weather
 
@@ -33,7 +34,7 @@ fun bindHourRecyclerView(recyclerView: RecyclerView, data: List<Hour>?) {
     adapter.submitList(data)
 }
 @BindingAdapter("listData")
-fun bindforecastRecyclerView(recyclerView: RecyclerView, data: List<Forecast>?) {
+fun bindforecastRecyclerView(recyclerView: RecyclerView, data: List<Forecastday>?) {
     val adapter = recyclerView.adapter as NextDayAdapter
     adapter.submitList(data)
 }

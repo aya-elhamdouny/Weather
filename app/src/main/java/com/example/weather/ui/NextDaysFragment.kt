@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.Forecast.adapters.NextDayAdapter
+import com.example.Forecastday.adapters.NextDayAdapter
 import com.example.weather.R
 import com.example.weather.databinding.FragmentNextDaysBinding
 import com.example.weather.repository.WeatherRepository

@@ -6,22 +6,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.model.Forecast
+import com.example.weather.model.Forecastday
 import com.example.weather.model.weather
+import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
-class NextDaysViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
+class NextDaysViewModel(val weatherRepository: WeatherRepository , val  databaseRepository: DatabaseRepository) : ViewModel() {
 
-    private val _forecast = MutableLiveData<Forecast>()
-    val forecast : LiveData<Forecast>
+    private val _forecast = MutableLiveData<List<Forecastday>>()
+    val forecast : LiveData<List<Forecastday>>
         get() = _forecast
 
     private val _status = MutableLiveData<String>()
     val status: LiveData<String>
         get() = _status
 
-    private val _navigateToSelectedProperty = MutableLiveData<Forecast>()
-    val navigateToSelectedProperty : LiveData<Forecast>
+    private val _navigateToSelectedProperty =MutableLiveData<List<Forecastday>>()
+    val navigateToSelectedProperty : LiveData<List<Forecastday>>
         get() = _navigateToSelectedProperty
 
 
@@ -34,7 +36,6 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository) : ViewModel() 
             try {
                 val listResult = weatherRepository.getday()
                 _forecast.value = listResult
-
             } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
             }
@@ -44,7 +45,7 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository) : ViewModel() 
 
 
     fun displayPropertyDetails(weather: weather) {
-       _navigateToSelectedProperty.value = weather.forecast
+       _navigateToSelectedProperty.value = weather.forecast.forecastday
     }
 
 
