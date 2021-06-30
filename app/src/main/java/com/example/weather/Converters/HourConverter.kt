@@ -9,12 +9,12 @@ class HourConverter {
 
 
     @TypeConverter
-    fun HourToString(hour: Hour) : String{
+    fun HourToString(hour: Hour) : String?{
         return Gson().toJson(hour)
     }
 
     @TypeConverter
-    fun StringToHour(string: String) : Hour {
+    fun StringToHour(string: String) : Hour? {
         return Gson().fromJson(string , Hour::class.java)
     }
 }

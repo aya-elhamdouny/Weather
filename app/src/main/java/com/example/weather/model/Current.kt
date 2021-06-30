@@ -17,6 +17,7 @@ data class Current constructor(
     val gust_mph: Double,
     val humidity: Int,
     val is_day: Int,
+    @PrimaryKey
     val last_updated: String,
     val last_updated_epoch: Int,
     val precip_in: Double,

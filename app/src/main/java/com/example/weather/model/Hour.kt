@@ -2,6 +2,7 @@ package com.example.weather.model
 
 import androidx.room.Embedded
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
@@ -20,6 +21,7 @@ data class Hour constructor(
     val heatindex_c: Double,
     val heatindex_f: Double,
     val humidity: Int,
+    @PrimaryKey
     val is_day: Int,
     val precip_in: Double,
     val precip_mm: Double,

@@ -6,15 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather.model.*
-import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
@@ -59,6 +55,10 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
                 Log.d("Time hi",listResult.forecast.forecastday[2].hour[0].time)
                 _hour.value = listResult.forecast.forecastday[2].hour
                 _forecast.value = listResult.forecast.forecastday[0]
+
+            //insert in database
+            weatherRepository.insertCurrentWeather(listResult.current)
+            weatherRepository.insertLocation(listResult.location)
 
         }
     }

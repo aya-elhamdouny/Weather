@@ -1,14 +1,10 @@
 package com.example.weather.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather.model.Forecast
 import com.example.weather.model.Forecastday
-import com.example.weather.model.weather
-import com.example.weather.repository.DatabaseRepository
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
