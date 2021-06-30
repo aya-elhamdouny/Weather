@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
-//@Entity(tableName = "currentWeather")
+@Entity(tableName = "currentWeather")
 data class Current constructor(
     val cloud: Int,
     val condition: Condition,

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 
-///@Entity(tableName = "location")
+@Entity(tableName = "location")
 data class Location(
     val country: String,
     val lat: Double,
