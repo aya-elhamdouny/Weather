@@ -9,4 +9,7 @@
     <string name="sunny">Sunny</string>
     <string name="temp">22°</string>
     <string name="next_days">Next Days</string>
+    <string name="back">back</string>
+    <string name="cloud">CLoud</string>
+    <string name="vis">VIS</string>
 </resources>

@@ -22,8 +22,8 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository ) : ViewModel()
     val status: LiveData<String>
         get() = _status
 
-    private val _navigateToSelectedProperty =MutableLiveData<List<Forecastday>>()
-    val navigateToSelectedProperty : LiveData<List<Forecastday>>
+    private val _navigateToSelectedProperty =MutableLiveData<Forecastday>()
+    val navigateToSelectedProperty : LiveData<Forecastday>
         get() = _navigateToSelectedProperty
 
 
@@ -45,7 +45,7 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository ) : ViewModel()
 
 
     fun displayPropertyDetails(forecastday: Forecastday) {
-       //_navigateToSelectedProperty.value = forecastday
+       _navigateToSelectedProperty.value = forecastday
     }
 
 

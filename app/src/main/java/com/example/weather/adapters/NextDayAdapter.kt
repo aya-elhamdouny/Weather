@@ -36,15 +36,16 @@ class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecas
         return viewHolder(ItemDayBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: viewHolder, position: Int) {
-        val data = getItem(position)
-       /* holder.itemView.setOnClickListener {
-            onClickListener.onClick(forecastday)
-        }*/
-        holder.bind(data)
-    }
-
     class OnClickListener(val clickListener: (forecastday : Forecastday) -> Unit) {
         fun onClick(forecastday : Forecastday) = clickListener(forecastday)
     }
+
+    override fun onBindViewHolder(holder: viewHolder, position: Int) {
+        val forecast = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(forecast)
+        }
+        holder.bind(forecast)
+    }
+
 }

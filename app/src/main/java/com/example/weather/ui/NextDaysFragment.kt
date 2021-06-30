@@ -53,9 +53,16 @@ class NextDaysFragment : Fragment() {
         }
 
         )
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner , Observer {
+            if (null != it){
+                this.findNavController().navigate(NextDaysFragmentDirections.actionNextDaysFragmentToDetailFragment(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
+        })
         binding.bkBtn.setOnClickListener {
             findNavController().navigate(NextDaysFragmentDirections.actionNextDaysFragmentToHomeFragment())
         }
+
 
 
         return binding.root
