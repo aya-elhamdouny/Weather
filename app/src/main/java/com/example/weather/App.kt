@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.util.Log
+import com.example.weather.database.WeatherDatabase
 
 class App : Application()
 {
@@ -17,6 +18,7 @@ class App : Application()
     override fun onCreate() {
         super.onCreate()
         app = this
+
 
         try {
             val wifiManager = app.getSystemService(Context.WIFI_SERVICE) as WifiManager

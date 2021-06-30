@@ -56,9 +56,11 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
                 _hour.value = listResult.forecast.forecastday[2].hour
                 _forecast.value = listResult.forecast.forecastday[0]
 
+            
             //insert in database
             weatherRepository.insertCurrentWeather(listResult.current)
             weatherRepository.insertLocation(listResult.location)
+            weatherRepository.insertforecast(listResult.forecast.forecastday)
 
         }
     }

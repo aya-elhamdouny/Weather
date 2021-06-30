@@ -10,7 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.Forecastday.adapters.NextDayAdapter
+import com.example.weather.App
 import com.example.weather.R
+import com.example.weather.database.WeatherDatabase
 import com.example.weather.databinding.FragmentNextDaysBinding
 import com.example.weather.repository.WeatherRepository
 import com.example.weather.viewmodel.NextDaysViewModel
@@ -21,8 +23,7 @@ import com.example.weather.viewmodel.WeatherViewModelProviderFactory
 
 class NextDaysFragment : Fragment() {
 
-    val repository = WeatherRepository()
-
+    val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app))
     private lateinit var binding: FragmentNextDaysBinding
 
     val nextDaysViewModelProviderFactory = NextDaysViewModelProviderFactory(repository)

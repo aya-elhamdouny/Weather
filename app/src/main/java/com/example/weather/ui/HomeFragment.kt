@@ -13,6 +13,7 @@ import com.example.Forecastday.adapters.NextDayAdapter
 import com.example.weather.App
 import com.example.weather.R
 import com.example.weather.adapters.WeatherAdapter
+import com.example.weather.database.WeatherDatabase
 import com.example.weather.databinding.FragmentHomeBinding
 import com.example.weather.model.weather
 import com.example.weather.repository.WeatherRepository
@@ -23,8 +24,7 @@ import com.example.weather.viewmodel.WeatherViewModelProviderFactory
 class HomeFragment : Fragment() {
 
 
-    val repository = WeatherRepository()
-
+    val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app))
     val weatherviewModelProviderFactory = WeatherViewModelProviderFactory(repository)
 
     private val viewModel: WeatherViewModel by lazy {
