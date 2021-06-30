@@ -32,12 +32,6 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         get() = _forecast
 
 
-    private val _navigateToSelectedProperty = MutableLiveData<Current>()
-    val navigateToSelectedProperty : LiveData<Current>
-        get() =_navigateToSelectedProperty
-
-
-
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
@@ -56,7 +50,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
                 _hour.value = listResult.forecast.forecastday[2].hour
                 _forecast.value = listResult.forecast.forecastday[0]
 
-            
+
             //insert in database
             weatherRepository.insertCurrentWeather(listResult.current)
             weatherRepository.insertLocation(listResult.location)
@@ -71,13 +65,5 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
     }
 
 
-    fun displayPropertyDetails(weather: weather) {
-        _navigateToSelectedProperty.value = weather.current
-    }
 
-
-
-    fun displayPropertyDetailsComplete() {
-        _navigateToSelectedProperty.value = null
-    }
 }
