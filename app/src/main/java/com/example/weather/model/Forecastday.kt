@@ -10,3 +10,19 @@ data class Forecastday constructor(
     val day: Day,
     val hour: List<Hour>
 ): Serializable
+/*
+
+fun List<Forecastday>.asDomainModel(): List<Forecastday> {
+
+    return  map {
+        Forecastday(
+            date = it.date,
+            date_epoch = it.date_epoch,
+            day = it.day,
+            hour = it.hour
+
+        )
+    }
+}
+*/
+

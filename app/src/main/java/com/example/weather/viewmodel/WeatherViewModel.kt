@@ -1,10 +1,7 @@
 package com.example.weather.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.weather.model.*
 import com.example.weather.repository.WeatherRepository
 import kotlinx.coroutines.CoroutineScope
@@ -32,29 +29,28 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         get() = _forecast
 
 
+
+    private val _Location = MutableLiveData<Location>()
+    val location : LiveData<Location>
+        get() = _Location
+
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
     init {
+        //getfrom data base and put it into el initlized val aly fo2
         getWeather()
-
-
     }
 
     private fun getWeather() {
         viewModelScope.launch {
-
+                weatherRepository.refreshData()
                 val listResult = weatherRepository.getForecast()
                 _response.postValue(listResult)
                 Log.d("Time hi",listResult.forecast.forecastday[2].hour[0].time)
                 _hour.value = listResult.forecast.forecastday[2].hour
                 _forecast.value = listResult.forecast.forecastday[0]
-
-
-            //insert in database
-            weatherRepository.insertCurrentWeather(listResult.current)
-            weatherRepository.insertLocation(listResult.location)
-            weatherRepository.insertforecast(listResult.forecast.forecastday)
 
         }
     }

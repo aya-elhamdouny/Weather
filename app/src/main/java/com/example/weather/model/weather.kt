@@ -9,3 +9,6 @@ data class weather (
     val forecast: Forecast,
     val location: Location
 ) : Serializable
+
+
+
