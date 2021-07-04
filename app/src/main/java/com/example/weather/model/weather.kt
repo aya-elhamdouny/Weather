@@ -1,7 +1,7 @@
 
 package com.example.weather.model
+import androidx.room.Entity
 import java.io.Serializable
-
 
 
 data class weather (

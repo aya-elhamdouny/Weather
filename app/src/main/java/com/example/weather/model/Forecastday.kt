@@ -8,21 +8,8 @@ data class Forecastday constructor(
     val date: String,
     val date_epoch: Int,
     val day: Day,
+    @ColumnInfo(name = "hourList")
     val hour: List<Hour>
 ): Serializable
-/*
 
-fun List<Forecastday>.asDomainModel(): List<Forecastday> {
-
-    return  map {
-        Forecastday(
-            date = it.date,
-            date_epoch = it.date_epoch,
-            day = it.day,
-            hour = it.hour
-
-        )
-    }
-}
-*/
 

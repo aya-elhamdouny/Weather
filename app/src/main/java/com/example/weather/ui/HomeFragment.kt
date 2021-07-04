@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
         adapter = WeatherAdapter()
         binding.tempRv.adapter = adapter
 
-        viewModel.hour.observe(viewLifecycleOwner, Observer{
+        viewModel.listHour.observe(viewLifecycleOwner, Observer{
             adapter.submitList(it) })
 
         binding.viewModel = viewModel

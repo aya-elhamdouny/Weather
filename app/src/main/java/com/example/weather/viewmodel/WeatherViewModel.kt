@@ -20,37 +20,34 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
     val response : LiveData<weather>
         get() = _response
 
+
     private val _hour = MutableLiveData<List<Hour>>()
     val hour : LiveData<List<Hour>>
         get() = _hour
+
 
     private val _forecast = MutableLiveData<Forecastday>()
     val forecast : LiveData<Forecastday>
         get() = _forecast
 
 
-
-    private val _Location = MutableLiveData<Location>()
-    val location : LiveData<Location>
-        get() = _Location
-
-
     private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.IO)
+
+    val current = weatherRepository.currentResult
+    val location = weatherRepository.locationResult
+    val listHour = weatherRepository.hourResult
+
 
     init {
-        //getfrom data base and put it into el initlized val aly fo2
         getWeather()
     }
 
     private fun getWeather() {
         viewModelScope.launch {
                 weatherRepository.refreshData()
-                val listResult = weatherRepository.getForecast()
-                _response.postValue(listResult)
-                Log.d("Time hi",listResult.forecast.forecastday[2].hour[0].time)
-                _hour.value = listResult.forecast.forecastday[2].hour
-                _forecast.value = listResult.forecast.forecastday[0]
+           val listResult = weatherRepository.getForecast()
+           _hour.value = listResult.forecast.forecastday[2].hour
+
 
         }
     }

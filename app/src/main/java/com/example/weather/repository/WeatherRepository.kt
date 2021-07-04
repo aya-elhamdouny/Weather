@@ -20,32 +20,20 @@ class WeatherRepository(val database: WeatherDatabase)  {
     var days : Int = 14
 
 
-    private val _response = MutableLiveData<weather>()
-    val response : LiveData<weather>
-        get() = _response
 
-    private val _hour = MutableLiveData<List<Hour>>()
-    val hour : LiveData<List<Hour>>
-        get() = _hour
+   val forecastdayResult  :LiveData<List<Forecastday>> =  database.weatherDao.getForecast()
 
-    private val _forecast = MutableLiveData<Forecastday>()
-    val forecast : LiveData<Forecastday>
-        get() = _forecast
+   val currentResult : LiveData<Current> = database.weatherDao.getCurrentWeather()
+
+    val locationResult : LiveData<Location> = database.weatherDao.getLocation()
+
+   val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHour()
 
 
-    private val _Location = MutableLiveData<Location>()
-    val location : LiveData<Location>
-        get() = _Location
 
-//    val result  : LiveData<Current> = Transformations.map(database.weatherDao.getCurrentWeather()){
-//
-//    }
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast(getCountryName() , days)
-
-    suspend fun getday()=
-        RetroftitBuilder.api.getForecast(getCountryName() , days).forecast.forecastday
 
     suspend fun getCountryName()=
             IPRetrofitBuilder.api.getCountryname(App.ip).country_name

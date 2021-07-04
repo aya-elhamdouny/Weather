@@ -49,7 +49,7 @@ class NextDaysFragment : Fragment() {
 
         binding.nextdaysRv.adapter = adapter
 
-        viewModel.forecast.observe(viewLifecycleOwner, {
+        viewModel.forecastday.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         }
 

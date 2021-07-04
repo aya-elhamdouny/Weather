@@ -22,22 +22,7 @@ class NextDaysViewModel(val weatherRepository: WeatherRepository ) : ViewModel()
     val navigateToSelectedProperty : LiveData<Forecastday>
         get() = _navigateToSelectedProperty
 
-
-    init {
-        getWeather()
-    }
-
-    private fun getWeather() {
-        viewModelScope.launch {
-            try {
-                val listResult = weatherRepository.getday()
-                _forecast.value = listResult
-            } catch (e: Exception) {
-                _status.value = "Failure: ${e.message}"
-            }
-        }
-
-    }
+    val forecastday =   weatherRepository.forecastdayResult
 
 
     fun displayPropertyDetails(forecastday: Forecastday) {

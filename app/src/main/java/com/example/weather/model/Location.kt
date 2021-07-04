@@ -20,21 +20,3 @@ data class Location constructor(
     val tz_id: String,
 
 ): Serializable
-
-fun List<Location>.asDomainModel() : List<Location>{
-    return map{
-        Location(
-            country = it.country,
-            lat = it.lat,
-            localtime = it.localtime,
-            localtime_epoch = it.localtime_epoch,
-            lon = it.lon,
-            name= it.name,
-            region = it.region,
-            tz_id = it.tz_id
-
-        )
-    }
-}
-
-

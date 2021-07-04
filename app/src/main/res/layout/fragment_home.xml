@@ -66,7 +66,7 @@
         android:id="@+id/cityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{viewModel.response.location.region}"
+        android:text="@{viewModel.location.region}"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -82,7 +82,7 @@
         android:textStyle="bold"
         android:textSize="25sp"
         android:paddingBottom="1dp"
-        android:text="@{viewModel.response.location.country}"
+        android:text="@{viewModel.location.country}"
         app:layout_constraintStart_toStartOf="@+id/rightGuideLine"
         app:layout_constraintTop_toBottomOf="@+id/cityName"/>
 
@@ -102,7 +102,7 @@
 
         <ImageView
             android:id="@+id/temp_iv"
-            imgUrl="@{viewModel.response.current.condition.icon}"
+            imgUrl="@{viewModel.current.condition.icon}"
             android:layout_width="246dp"
             android:layout_height="154dp"
             android:contentDescription="@string/sunny"
@@ -114,7 +114,7 @@
             android:id="@+id/temp_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Double.toString(viewModel.response.current.temp_c)}"
+            android:text="@{Double.toString(viewModel.current.temp_c)}"
             android:textColor="@color/black"
             android:textSize="60sp"
             app:layout_constraintStart_toStartOf="@+id/detail_layout"
@@ -125,7 +125,7 @@
             android:id="@+id/temp_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.response.current.condition.text}"
+            android:text="@{viewModel.current.condition.text}"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/detail_layout"
@@ -177,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{Double.toString(viewModel.response.current.humidity)}"/>
+                android:text="@{Double.toString(viewModel.current.humidity)}"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -213,7 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{Double.toString(viewModel.response.current.precip_mm)}"/>
+                    android:text="@{Double.toString(viewModel.current.precip_mm)}"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -247,7 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{Double.toString(viewModel.response.current.wind_mph)}"/>
+                    android:text="@{Double.toString(viewModel.current.wind_mph)}"/>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
