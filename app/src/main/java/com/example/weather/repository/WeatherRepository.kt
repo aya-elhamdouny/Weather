@@ -35,6 +35,8 @@ class WeatherRepository(val database: WeatherDatabase)  {
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast("alexandria" , days)
+
+
    /* suspend fun getCountryName()=
             IPRetrofitBuilder.api.getCountryname(App.ip ).country_name
 
