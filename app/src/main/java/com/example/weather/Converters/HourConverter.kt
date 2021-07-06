@@ -9,24 +9,19 @@ import com.google.gson.reflect.TypeToken
 
 class HourConverter {
 
-
     @TypeConverter
     fun HourToString(hour: Hour) : String?{
-        return Gson().toJson(hour)
-    }
+    return Gson().toJson(hour) }
 
     @TypeConverter
     fun StringToHour(string: String) : Hour? {
         return Gson().fromJson(string , Hour::class.java)
     }
 
-
-
     @TypeConverter
     fun HourListToString(list: List<Hour?>?): String? {
         return Gson().toJson(list)
     }
-
 
     @TypeConverter
     fun stringToHourList(json: String?): List<Hour>? {

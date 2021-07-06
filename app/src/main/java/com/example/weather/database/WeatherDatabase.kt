@@ -8,10 +8,11 @@ import androidx.room.TypeConverters
 import com.example.weather.Converters.*
 import com.example.weather.model.Current
 import com.example.weather.model.Forecastday
+import com.example.weather.model.Hour
 import com.example.weather.model.Location
 
 
-@Database(entities = [Location::class , Forecastday::class , Current::class] ,
+@Database(entities = [Location::class , Forecastday::class , Current::class , Hour::class] ,
                     version = 1 , exportSchema = false)
 
 @TypeConverters(CondtionConverter::class , DayConverter::class , ForecastConverter::class,

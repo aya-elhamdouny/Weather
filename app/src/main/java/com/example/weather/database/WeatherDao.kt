@@ -26,12 +26,17 @@ interface WeatherDao {
     suspend fun insertForecast(forecastday: List<Forecastday>)
 
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertHour(hours :List<Hour> )
+
+
+    @Query("select * from hour")
+    fun getHours() : LiveData<List<Hour>>
+
     @Query("select * from forecastday ")
     fun getForecast() : LiveData<List<Forecastday>>
 
+
     @Query("SELECT hourList FROM forecastday")
     fun getHour():  LiveData<List<Hour>>
-
-
-
 }

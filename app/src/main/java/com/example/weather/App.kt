@@ -22,7 +22,6 @@ class App : Application() {
         var ip = 0
         const val WORK_NAME = "RefreshDataWorker"
 
-
     }
 
 

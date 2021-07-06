@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 
-
+@Entity(tableName = "hour")
 data class Hour constructor(
     val chance_of_rain: String,
     val chance_of_snow: String,

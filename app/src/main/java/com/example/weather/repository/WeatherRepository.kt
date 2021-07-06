@@ -19,48 +19,34 @@ class WeatherRepository(val database: WeatherDatabase)  {
 
     var days : Int = 14
 
-
-
    val forecastdayResult  :LiveData<List<Forecastday>> =  database.weatherDao.getForecast()
 
    val currentResult : LiveData<Current> = database.weatherDao.getCurrentWeather()
 
     val locationResult : LiveData<Location> = database.weatherDao.getLocation()
 
-   val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHour()
+    val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHour()
+
+    val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
+
 
 
 
 
     suspend fun getForecast() =
-        RetroftitBuilder.api.getForecast(getCountryName() , days)
+        RetroftitBuilder.api.getForecast("alexandria" , days)
+   /* suspend fun getCountryName()=
+            IPRetrofitBuilder.api.getCountryname(App.ip ).country_name
 
-    suspend fun getCountryName()=
-            IPRetrofitBuilder.api.getCountryname(App.ip).country_name
-
-
+*/
     suspend fun refreshData(){
         withContext(Dispatchers.IO){
-            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast(getCountryName() , days).current)
-            database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast(getCountryName(), days).location)
-            database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast(getCountryName(), days).forecast.forecastday)
+            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast("alexandria" , days).current)
+            database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast("alexandria" , days).location)
+            database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast("alexandria" , days).forecast.forecastday)
+           // database.weatherDao.insertHour(RetroftitBuilder.api.getForecast("alexandria", days).forecast.forecastday[0].hour)
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
