@@ -1,18 +1,11 @@
 package com.example.weather.ui
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.weather.App
-import com.example.weather.GPSUtils
 import com.example.weather.R
 import com.example.weather.TrackingUtils
 import com.example.weather.adapters.WeatherAdapter
@@ -32,7 +24,6 @@ import com.example.weather.viewmodel.WeatherViewModel
 import com.example.weather.viewmodel.WeatherViewModelProviderFactory
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import timber.log.Timber
 
 
 const val LOCATION_REQUEST = 0
@@ -46,6 +37,8 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this, weatherviewModelProviderFactory).get(WeatherViewModel::class.java)
     }
+
+
 
     private lateinit var binding: FragmentHomeBinding
     lateinit var adapter: WeatherAdapter
@@ -122,6 +115,7 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         Toast.makeText(context, "Location allowed" , Toast.LENGTH_SHORT).show()
+        setupLocation()
     }
 
     override fun onRequestPermissionsResult(
@@ -131,5 +125,12 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+
+
+    private fun setupLocation(){
+
+
     }
 }

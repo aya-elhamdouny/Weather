@@ -31,6 +31,11 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         get() = _forecast
 
 
+    var latitude : Double = 0.0
+    var longitude : Double = 0.0
+
+
+
     private var viewModelJob = Job()
 
     val current = weatherRepository.currentResult

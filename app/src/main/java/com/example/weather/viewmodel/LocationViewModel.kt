@@ -8,9 +8,10 @@ class LocationViewModel(app: App) : ViewModel()  {
 
     private val locationData =  LocationLiveData(app)
 
-    val lat = locationData.value?.latitude
-    val long = locationData.value?.longitude
-
     fun getLocation() =
         locationData
+
+
+
+
 }
