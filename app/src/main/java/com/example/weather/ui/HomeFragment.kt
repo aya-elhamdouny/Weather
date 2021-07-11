@@ -93,9 +93,22 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
                 "You need to accept location permissions to use this app.",
                 LOCATION_REQUEST,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             )
+            context?.let {
+                EasyPermissions.hasPermissions(
+                    it,
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            }
+            context?.let {
+                EasyPermissions.hasPermissions(
+                    it,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                    Manifest.permission.FOREGROUND_SERVICE
+                )
+            }
         }
     }
 
