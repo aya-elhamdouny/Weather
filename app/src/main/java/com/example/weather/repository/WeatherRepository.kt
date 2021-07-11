@@ -14,6 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class WeatherRepository(val database: WeatherDatabase)  {
 
@@ -25,13 +26,10 @@ class WeatherRepository(val database: WeatherDatabase)  {
 
     val locationResult : LiveData<Location> = database.weatherDao.getLocation()
 
-    val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHour()
+    val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHours()
+
 
     val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
-
-
-
-
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast("alexandria" , days)
@@ -41,12 +39,14 @@ class WeatherRepository(val database: WeatherDatabase)  {
             IPRetrofitBuilder.api.getCountryname(App.ip ).country_name
 
 */
+
+
     suspend fun refreshData(){
         withContext(Dispatchers.IO){
             database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast("alexandria" , days).current)
             database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast("alexandria" , days).location)
             database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast("alexandria" , days).forecast.forecastday)
-           // database.weatherDao.insertHour(RetroftitBuilder.api.getForecast("alexandria", days).forecast.forecastday[0].hour)
+            database.weatherDao.insertHour(RetroftitBuilder.api.getForecast("alexandria", days).forecast.forecastday[0].hour)
         }
     }
 

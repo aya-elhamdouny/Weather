@@ -12,4 +12,7 @@
     <string name="back">back</string>
     <string name="cloud">CLoud</string>
     <string name="vis">VIS</string>
+    <string name="latLong">Longitude: %.3f, Latitude: %.3f</string>
+    <string name="enable_gps">Please enable your gps</string>
+    <string name="permission_request">App requires location permission</string>
 </resources>

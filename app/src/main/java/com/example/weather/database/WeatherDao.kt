@@ -30,7 +30,7 @@ interface WeatherDao {
     suspend fun insertHour(hours :List<Hour> )
 
 
-    @Query("select * from hour")
+    @Query("SELECT * FROM hour")
     fun getHours() : LiveData<List<Hour>>
 
     @Query("select * from forecastday ")

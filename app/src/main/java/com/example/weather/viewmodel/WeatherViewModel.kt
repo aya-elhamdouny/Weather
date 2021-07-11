@@ -38,6 +38,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
     val listHour = weatherRepository.hourResult
 
 
+
     init {
         getWeather()
     }
@@ -46,7 +47,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         viewModelScope.launch {
                 weatherRepository.refreshData()
            val listResult = weatherRepository.getForecast()
-           _hour.value = listResult.forecast.forecastday[2].hour
+           _hour.value = listResult.forecast.forecastday[0].hour
 
 
         }

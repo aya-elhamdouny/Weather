@@ -4,13 +4,22 @@ import android.app.Application
 import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
+import android.text.format.Formatter
 import android.util.Log
 import androidx.work.*
 import com.example.weather.Work.RefreshDataWork
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import timber.log.Timber.DebugTree
+import java.net.InetAddress
+import java.net.NetworkInterface
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
+import java.util.*
 import java.util.concurrent.TimeUnit
+
 
 class App : Application() {
 
@@ -20,6 +29,7 @@ class App : Application() {
     companion object {
         lateinit var app: App
         var ip = 0
+        var ipString = ""
         const val WORK_NAME = "RefreshDataWorker"
 
     }
@@ -57,14 +67,26 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         app = this
+        if (BuildConfig.DEBUG) {
+            Timber.plant(DebugTree())
+        }
         delayinit()
 
 
+
+
+
         try {
-            val wifiManager = app.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val wifiManager = app.getSystemService(WIFI_SERVICE) as WifiManager
             val ipAddress: Int = wifiManager.connectionInfo.ipAddress
             ip = ipAddress
-            Log.d("ADebugTag", "ipaddress: " + ipAddress)
+
+            ipString = InetAddress.getByAddress(
+                ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ip).array())
+                .getHostAddress()
+            Timber.d("ipaddress: %s", ipString)
+            Timber.d("ipaddresstring: %s", ipAddress)
+
 
 
         } catch (e: Exception) {
@@ -74,6 +96,7 @@ class App : Application() {
 
 
     }
+
 
 
 }
