@@ -40,7 +40,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
     val current = weatherRepository.currentResult
     val location = weatherRepository.locationResult
-    val listHour = weatherRepository.hourResult
+    //val listHour = weatherRepository.hour
 
 
 

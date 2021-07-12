@@ -17,17 +17,7 @@ class HourConverter {
         return Gson().fromJson(string, Hour::class.java)
     }
 
-    @TypeConverter
-    fun HourListToString(list: List<Hour?>?): String? {
-        return Gson().toJson(list)
-    }
 
-    @TypeConverter
-    fun stringToHourList(json: String?): List<Hour>? {
-
-        val list = object : TypeToken<List<Hour?>?>() {}.type
-        return Gson().fromJson(json, list)
-    }
 
 /*
     @TypeConverter

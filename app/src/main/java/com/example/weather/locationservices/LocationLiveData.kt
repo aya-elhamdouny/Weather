@@ -3,15 +3,18 @@ package com.example.weather.locationservices
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
-import androidx.core.app.ActivityCompat
+import android.location.LocationManager
+import android.util.Log
+import androidx.core.location.LocationManagerCompat
 import androidx.lifecycle.LiveData
 import com.example.weather.model.Postion
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import java.util.*
 
 class LocationLiveData(context: Context)  : LiveData<Postion>() {
 
@@ -28,10 +31,19 @@ class LocationLiveData(context: Context)  : LiveData<Postion>() {
     }
 
 
+    @SuppressLint("ServiceCast")
+    private fun isLocationEnabled(context: Context): Boolean {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return LocationManagerCompat.isLocationEnabled(locationManager)
+    }
+
     //will be invoked when we have location update from FusedLocationProviderClient
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(p0: LocationResult?) {
            p0?: return
+            // return the last saved location
+            var lat = p0.lastLocation.latitude
+            val long = p0.lastLocation.longitude
             for(location in p0.locations)
             {
                 setLocationData(location)
@@ -43,7 +55,8 @@ class LocationLiveData(context: Context)  : LiveData<Postion>() {
 
 
    //to call fused.updates
-   @SuppressLint("MissingPermission")
+
+    @SuppressLint("MissingPermission")
     private fun startLocation(){
         fusedLocationProviderClient.requestLocationUpdates(
             locationRequest, locationCallback, null
@@ -80,6 +93,10 @@ class LocationLiveData(context: Context)  : LiveData<Postion>() {
         super.onInactive()
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
     }
+
+
+
+
 
 
 }

@@ -8,7 +8,6 @@ import com.google.gson.reflect.TypeToken
 class ForecastConverter {
 
 
-
     @TypeConverter
     fun forecastDayToString(list: List<Forecastday?>?): String? {
         return Gson().toJson(list)

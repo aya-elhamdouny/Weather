@@ -1,5 +1,6 @@
 package com.example.weather.repository
 
+import android.location.Geocoder
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.*
 
 class WeatherRepository(val database: WeatherDatabase)  {
 
@@ -29,10 +31,14 @@ class WeatherRepository(val database: WeatherDatabase)  {
     val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHours()
 
 
-    val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
+    //val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
+
+    var lat: Double = 0.0
+    var long: Double = 0.0
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast("alexandria" , days)
+
 
 
    /* suspend fun getCountryName()=
@@ -50,5 +56,16 @@ class WeatherRepository(val database: WeatherDatabase)  {
         }
     }
 
+    fun setCoordinaties(lat : Double, long : Double) : String{
+        var cityName:String = ""
+        var countryName = ""
+        val geoCoder = Geocoder(App.app.applicationContext, Locale.getDefault())
+        val Adress = geoCoder.getFromLocation(lat,long,3)
+        cityName = Adress.get(0).locality
+        countryName = Adress.get(0).countryName
+        //Log.d("Debug:","Your City: " + cityName + " ; your Country " + countryName)
+        return cityName
+
+   }
 
 }

@@ -16,7 +16,7 @@ import com.example.weather.model.Location
                     version = 1 , exportSchema = false)
 
 @TypeConverters(CondtionConverter::class , DayConverter::class , ForecastConverter::class,
-                ForecasydayConverter::class , HourConverter::class )
+                ForecasydayConverter::class , HourConverter::class  , HourListConverter::class)
 abstract class WeatherDatabase: RoomDatabase(){
 
     abstract val weatherDao : WeatherDao
