@@ -1,6 +1,6 @@
 package com.example.weather.model
 
 data class Postion (
-    val longitude: Double,
-    val latitude: Double
+    var longitude: Double,
+    var latitude: Double
     )

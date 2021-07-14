@@ -1,24 +1,19 @@
 package com.example.weather.repository
 
+import android.annotation.SuppressLint
 import android.location.Geocoder
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.viewModelScope
 import com.example.weather.App
-import com.example.weather.addresapi.IPRetrofitBuilder
 import com.example.weather.api.RetroftitBuilder
 import com.example.weather.database.WeatherDatabase
 import com.example.weather.model.*
-import kotlinx.coroutines.CoroutineScope
+import com.example.weather.ui.geoLocatoin
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.*
 
-class WeatherRepository(val database: WeatherDatabase)  {
+class WeatherRepository(val database: WeatherDatabase , val app: App)  {
 
     var days : Int = 14
 
@@ -30,26 +25,29 @@ class WeatherRepository(val database: WeatherDatabase)  {
 
     val hourResult :  LiveData<List<Hour>> = database.weatherDao.getHours()
 
-
     //val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
 
-    var lat: Double = 0.0
-    var long: Double = 0.0
+
+@SuppressLint("TimberArgCount")
+fun formatGeoLocation() : String{
+    var lat = geoLocatoin.lat
+    var long =geoLocatoin.long
+    var comma = ","
+    var query : String = ""
+      query = lat.toString().plus("").plus(comma).plus(long.toString())
+    return query
+}
+
+
+
+
 
     suspend fun getForecast() =
         RetroftitBuilder.api.getForecast("alexandria" , days)
-
-
-
-   /* suspend fun getCountryName()=
-            IPRetrofitBuilder.api.getCountryname(App.ip ).country_name
-
-*/
-
-
+    
     suspend fun refreshData(){
         withContext(Dispatchers.IO){
-            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast("alexandria" , days).current)
+            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast( "alexandria", days).current)
             database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast("alexandria" , days).location)
             database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast("alexandria" , days).forecast.forecastday)
             database.weatherDao.insertHour(RetroftitBuilder.api.getForecast("alexandria", days).forecast.forecastday[0].hour)
@@ -57,7 +55,7 @@ class WeatherRepository(val database: WeatherDatabase)  {
     }
 
     fun setCoordinaties(lat : Double, long : Double) : String{
-        var cityName:String = ""
+        var cityName:String =""
         var countryName = ""
         val geoCoder = Geocoder(App.app.applicationContext, Locale.getDefault())
         val Adress = geoCoder.getFromLocation(lat,long,3)
@@ -69,3 +67,5 @@ class WeatherRepository(val database: WeatherDatabase)  {
    }
 
 }
+
+

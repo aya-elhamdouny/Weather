@@ -29,6 +29,8 @@ class App : Application() {
     companion object {
         lateinit var app: App
         var ip = 0
+        var lat = 0.0
+        var long = 0.0
         var ipString = ""
         const val WORK_NAME = "RefreshDataWorker"
 
@@ -72,7 +74,7 @@ class App : Application() {
         }
         delayinit()
 
-
+      Timber.d("APP LAT %S" , lat)
 
 
 

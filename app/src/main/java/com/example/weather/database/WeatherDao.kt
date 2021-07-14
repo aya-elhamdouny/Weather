@@ -1,5 +1,6 @@
 package com.example.weather.database
 
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.weather.model.Current
@@ -12,6 +13,10 @@ interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLocation(location: Location)
+
+
+
+
 
     @Query("select * from location ")
     fun getLocation() : LiveData<Location>

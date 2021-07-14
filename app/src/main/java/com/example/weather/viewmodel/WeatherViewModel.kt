@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.weather.model.*
 import com.example.weather.repository.WeatherRepository
+import com.example.weather.ui.geoLocatoin
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import timber.log.Timber.*
 
 class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
@@ -31,9 +34,9 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         get() = _forecast
 
 
-    var latitude : Double = 0.0
-    var longitude : Double = 0.0
-
+    private val _Postion = MutableLiveData<Postion>()
+    val postion : LiveData<Postion>
+        get() = _Postion
 
 
     private var viewModelJob = Job()
@@ -46,6 +49,7 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
 
     init {
         getWeather()
+
     }
 
     private fun getWeather() {
@@ -54,9 +58,9 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
            val listResult = weatherRepository.getForecast()
            _hour.value = listResult.forecast.forecastday[0].hour
 
-
         }
     }
+
 
     override fun onCleared() {
         super.onCleared()

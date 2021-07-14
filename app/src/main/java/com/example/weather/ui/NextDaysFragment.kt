@@ -23,7 +23,7 @@ import com.example.weather.viewmodel.WeatherViewModelProviderFactory
 
 class NextDaysFragment : Fragment() {
 
-    val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app))
+    val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app) , App.app)
     private lateinit var binding: FragmentNextDaysBinding
 
     val nextDaysViewModelProviderFactory = NextDaysViewModelProviderFactory(repository)

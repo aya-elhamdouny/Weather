@@ -16,7 +16,7 @@ class RefreshDataWork(appContext : Context , params : WorkerParameters) :
 
 
     override suspend fun doWork(): Result {
-        val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app))
+        val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app), App.app)
         return try {
             repository.refreshData()
             Result.success()
