@@ -28,43 +28,28 @@ class WeatherRepository(val database: WeatherDatabase , val app: App)  {
     //val hour :  LiveData<List<Hour>> = database.weatherDao.getHour()
 
 
-@SuppressLint("TimberArgCount")
-fun formatGeoLocation() : String{
-    var lat = geoLocatoin.lat
-    var long =geoLocatoin.long
-    var comma = ","
-    var query : String = ""
-      query = lat.toString().plus("").plus(comma).plus(long.toString())
-    return query
+
+fun formatGeoLocation(lat: Double , long : Double) : String{
+
+     var comma = ","
+     var q : String = ""
+     q = lat.toString().plus("").plus(comma).plus(long.toString())
+     return q
 }
 
+    suspend fun getForecast(query : String) =
+        RetroftitBuilder.api.getForecast(query , days)
 
-
-
-
-    suspend fun getForecast() =
-        RetroftitBuilder.api.getForecast("alexandria" , days)
-    
-    suspend fun refreshData(){
+    suspend fun refreshData(query : String){
         withContext(Dispatchers.IO){
-            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast( "alexandria", days).current)
-            database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast("alexandria" , days).location)
-            database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast("alexandria" , days).forecast.forecastday)
-            database.weatherDao.insertHour(RetroftitBuilder.api.getForecast("alexandria", days).forecast.forecastday[0].hour)
+            database.weatherDao.insertCurrentWeather(RetroftitBuilder.api.getForecast( query, days).current)
+            database.weatherDao.insertLocation(RetroftitBuilder.api.getForecast(query , days).location)
+            database.weatherDao.insertForecast(RetroftitBuilder.api.getForecast(query , days).forecast.forecastday)
+            database.weatherDao.insertHour(RetroftitBuilder.api.getForecast(query, days).forecast.forecastday[0].hour)
         }
     }
 
-    fun setCoordinaties(lat : Double, long : Double) : String{
-        var cityName:String =""
-        var countryName = ""
-        val geoCoder = Geocoder(App.app.applicationContext, Locale.getDefault())
-        val Adress = geoCoder.getFromLocation(lat,long,3)
-        cityName = Adress.get(0).locality
-        countryName = Adress.get(0).countryName
-        //Log.d("Debug:","Your City: " + cityName + " ; your Country " + countryName)
-        return cityName
 
-   }
 
 }
 

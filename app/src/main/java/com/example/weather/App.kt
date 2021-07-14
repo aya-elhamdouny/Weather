@@ -1,11 +1,8 @@
 package com.example.weather
 
 import android.app.Application
-import android.content.Context
 import android.net.wifi.WifiManager
 import android.os.Build
-import android.text.format.Formatter
-import android.util.Log
 import androidx.work.*
 import com.example.weather.Work.RefreshDataWork
 import kotlinx.coroutines.CoroutineScope
@@ -14,10 +11,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import java.net.InetAddress
-import java.net.NetworkInterface
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -74,22 +69,17 @@ class App : Application() {
         }
         delayinit()
 
-      Timber.d("APP LAT %S" , lat)
-
-
-
         try {
             val wifiManager = app.getSystemService(WIFI_SERVICE) as WifiManager
             val ipAddress: Int = wifiManager.connectionInfo.ipAddress
             ip = ipAddress
 
             ipString = InetAddress.getByAddress(
-                ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ip).array())
-                .getHostAddress()
+                ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ip).array()
+            ).getHostAddress()
+
             Timber.d("ipaddress: %s", ipString)
             Timber.d("ipaddresstring: %s", ipAddress)
-
-
 
         } catch (e: Exception) {
             val _status: String
@@ -98,7 +88,6 @@ class App : Application() {
 
 
     }
-
 
 
 }

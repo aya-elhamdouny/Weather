@@ -30,6 +30,8 @@ class RetroftitBuilder {
             retrofit.create(ApiInterface::class.java)
         }
 
+        private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
 
         private val client: OkHttpClient = OkHttpClient.Builder().apply {
             this.addInterceptor { chain ->
@@ -41,6 +43,7 @@ class RetroftitBuilder {
 
                 chain.proceed(request)
             }
+            this.addInterceptor(logging)
         } .callTimeout(2, TimeUnit.MINUTES)
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

@@ -34,31 +34,29 @@ class WeatherViewModel(val weatherRepository: WeatherRepository) : ViewModel() {
         get() = _forecast
 
 
-    private val _Postion = MutableLiveData<Postion>()
-    val postion : LiveData<Postion>
-        get() = _Postion
-
 
     private var viewModelJob = Job()
 
     val current = weatherRepository.currentResult
     val location = weatherRepository.locationResult
     //val listHour = weatherRepository.hour
-
-
-
-    init {
+   /* init {
         getWeather()
+        Timber.d("from viwmodel1")
 
-    }
+    }*/
 
-    private fun getWeather() {
+     fun getWeather(query : String) {
         viewModelScope.launch {
-                weatherRepository.refreshData()
-           val listResult = weatherRepository.getForecast()
+                weatherRepository.refreshData(query)
+           val listResult = weatherRepository.getForecast(query)
            _hour.value = listResult.forecast.forecastday[0].hour
 
         }
+    }
+
+    fun sendtoRepo(lat : Double , long: Double) {
+     Timber.d("from viwmodel2")
     }
 
 

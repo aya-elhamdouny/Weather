@@ -48,17 +48,12 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 const val LOCATION_REQUEST = 0
 @SuppressLint("StaticFieldLeak")
 lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
 class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
-
-
-    var _lat: Double =0.0
-    var _long: Double=0.0
-
 
     val repository = WeatherRepository(WeatherDatabase.getDatabase(App.app) , App.app)
     val weatherviewModelProviderFactory = WeatherViewModelProviderFactory(repository)
     val locationViewModelProviderFactory = LocationViewModelProviderFactory(App())
-
 
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this, weatherviewModelProviderFactory).get(WeatherViewModel::class.java)
@@ -72,38 +67,22 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
     lateinit var adapter: WeatherAdapter
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
         adapter = WeatherAdapter()
         binding.tempRv.adapter = adapter
-
-
-        requestPermissions()
-
         viewModel.hour.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-        })
-
-
+            adapter.submitList(it) })
+        requestPermissions()
         binding.viewModel = viewModel
-
         binding.nextdaysBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNextDaysFragment())
-        }
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToNextDaysFragment()) }
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(  requireContext())
         getLastLocation()
-
-
-
         return binding.root
     }
-
-    fun getLastLocation(){
+    fun getLastLocation() {
         if(checkPermission()){
             if(isLocationEnabled){
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener{
@@ -111,6 +90,7 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
                     val long = it?.longitude
                     Timber.d("lat from getlast %s" , lat)
                     Timber.d("long from getlast %s" , long)
+                    viewModel.getWeather(lat.toString() + "," + long.toString())
                  /*   if (lat != null) {
                         if (long != null) {
                             setupLocation(it)
@@ -123,9 +103,13 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
                     }else{
                         Timber.d(" location data fetched ")
                         setupLocation(it)
-                        getCountryname(it.latitude, it.latitude)
+
                     }
+
+
+
                 }
+
             }
             else{
                    requestPermissions()
@@ -134,12 +118,9 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
         else{
             requestPermissions()
         }
+
+
     }
-
-
-
-
-
     fun checkPermission() : Boolean{
         return ActivityCompat.checkSelfPermission(
             requireContext(),
@@ -150,7 +131,7 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
         ) == PackageManager.PERMISSION_GRANTED
 
     }
-    private val isLocationEnabled: Boolean
+    val isLocationEnabled: Boolean
         get() {
             val locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
             return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
@@ -177,13 +158,16 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
         override fun onLocationResult(p0: LocationResult?) {
             super.onLocationResult(p0)
             p0?: return
-            // return the last saved location
             val lat = p0.lastLocation.latitude
             val long = p0.lastLocation.longitude
-
+            viewModel.getWeather(lat.toString() + "," + long.toString())
             setupLocation(p0.lastLocation)
+
+
         }
     }
+
+
 
     private fun setupLocation(location: Location) {
         Postion(
@@ -191,29 +175,21 @@ class HomeFragment : Fragment()  , EasyPermissions.PermissionCallbacks{
             longitude = location.longitude
         )
 
-        val country = getCountryname(location.latitude , location.longitude)
+
         App.lat= location.latitude
         geoLocatoin.lat = location.latitude
         geoLocatoin.long=location.longitude
         App.long = location.longitude
         Timber.d("App lat and lond : %s",geoLocatoin.long )
-        Timber.d("ciuntry : %s ", country)
         Timber.d("lat %s" , location.latitude )
         Timber.d("long %s" , location.longitude )
-    }
 
 
-    fun getCountryname(lat : Double , long : Double ) : String {
-        var geocoder: Geocoder
-        var addressList = ArrayList<Address>()
-        geocoder = Geocoder(requireContext(), Locale.getDefault())
-        addressList = geocoder.getFromLocation(lat , long, 1) as ArrayList<Address>
-        return    addressList.get(0).adminArea
     }
 
 
 
-    private fun requestPermissions() {
+     fun requestPermissions() {
         if(TrackingUtils.hasLocationPermissions(requireContext())) {
             return
         }

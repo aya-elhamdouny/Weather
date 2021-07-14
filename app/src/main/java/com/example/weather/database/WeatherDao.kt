@@ -14,10 +14,6 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLocation(location: Location)
 
-
-
-
-
     @Query("select * from location ")
     fun getLocation() : LiveData<Location>
 

@@ -11,11 +11,11 @@ import java.io.Serializable
 data class Location constructor(
     val country: String,
     val lat: Double,
+    @PrimaryKey
     val localtime: String,
     val localtime_epoch: Int,
     val lon: Double,
     val name: String,
-    @PrimaryKey
     val region: String,
     val tz_id: String,
 
