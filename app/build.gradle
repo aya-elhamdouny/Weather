@@ -123,6 +123,10 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
 
 
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 
 

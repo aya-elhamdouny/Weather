@@ -11,4 +11,5 @@
     <color name="lightgreen">#D1EBD2</color>
     <color name="lightRed">#FEE3BB</color>
     <color name="lightPurple">#9583B1</color>
+    <color name="colorGrey">#dddddd</color>
 </resources>

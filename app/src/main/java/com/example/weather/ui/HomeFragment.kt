@@ -37,6 +37,8 @@ import com.example.weather.viewmodel.LocationViewModelProviderFactory
 import com.example.weather.viewmodel.WeatherViewModel
 import com.example.weather.viewmodel.WeatherViewModelProviderFactory
 import com.google.android.gms.location.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
@@ -69,7 +71,6 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     lateinit var adapter: WeatherAdapter
 
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,10 +79,20 @@ class HomeFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
         adapter = WeatherAdapter()
+
+        binding.shammerLayout.startShimmer()
+
+
         binding.tempRv.adapter = adapter
+
+
         viewModel.hour.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
         })
+
+        binding.shammerLayout.stopShimmer()
+       // binding.shammerLayout.visibility = View.GONE
+
         requestPermissions()
         binding.viewModel = viewModel
         binding.nextdaysBtn.setOnClickListener {

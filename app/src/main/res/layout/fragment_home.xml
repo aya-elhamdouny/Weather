@@ -290,13 +290,40 @@
         app:layout_constraintEnd_toStartOf="@id/leftGuideline"/>
 
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/rightGuideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nextdays_btn"
+        app:layout_constraintBottom_toTopOf="@id/bottomguideline"
+        android:id="@+id/shammer_layout"
+        app:shimmer_repeat_mode="restart"
+        app:shimmer_shape="radial"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+            <include  layout="@layout/shimmer_placeholder_hourlist_layout"/>
+        </LinearLayout>
+
+
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/temp_rv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:listitem="@layout/item_temp"
-        android:layoutAnimation="@anim/nextdays_layoutanimation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
         app:layout_constraintEnd_toEndOf="parent"
