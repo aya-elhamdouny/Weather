@@ -296,6 +296,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         tools:listitem="@layout/item_temp"
+        android:layoutAnimation="@anim/nextdays_layoutanimation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toEndOf="@id/rightGuideLine"
         app:layout_constraintEnd_toEndOf="parent"

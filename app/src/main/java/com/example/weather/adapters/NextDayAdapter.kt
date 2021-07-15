@@ -42,6 +42,7 @@ class NextDayAdapter(val onClickListener: OnClickListener) : ListAdapter<Forecas
 
     override fun onBindViewHolder(holder: viewHolder, position: Int) {
         val forecast = getItem(position)
+        
         holder.itemView.setOnClickListener {
             onClickListener.onClick(forecast)
         }

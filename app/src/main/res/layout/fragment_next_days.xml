@@ -28,6 +28,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nextdays_rv"
         tools:listitem="@layout/item_day"
+        android:layoutAnimation="@anim/nextdays_layoutanimation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

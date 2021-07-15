@@ -13,7 +13,7 @@ import com.example.weather.model.Location
 
 
 @Database(entities = [Location::class , Forecastday::class , Current::class , Hour::class] ,
-                    version = 1 , exportSchema = false)
+                    version = 2 , exportSchema = false)
 
 @TypeConverters(CondtionConverter::class , DayConverter::class , ForecastConverter::class,
                 ForecasydayConverter::class , HourConverter::class  , HourListConverter::class)
